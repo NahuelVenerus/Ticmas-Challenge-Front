@@ -9,7 +9,7 @@ const TaskForm = ({ onCreate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!title.trim()) return;
-    
+
     onCreate({ title, description });
     setTitle("");
     setDescription("");
@@ -21,7 +21,9 @@ const TaskForm = ({ onCreate }) => {
         type="text"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        placeholder="Título"
       />
+
       <DescriptionInput
         placeholder="Descripción"
         value={description}
@@ -32,6 +34,7 @@ const TaskForm = ({ onCreate }) => {
         <Button type="button" bgColor="#f39c12" hoverColor="#e67e22" activeColor="#f39c12">Archivar</Button>
         <Button type="button" bgColor="#e74c3c" hoverColor="#c0392b" activeColor="#e74c3c">Eliminar</Button>
       </ButtonContainer>
+
     </TaskFormContainer>
   );
 };

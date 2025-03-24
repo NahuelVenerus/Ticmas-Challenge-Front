@@ -3,14 +3,14 @@ import { TaskContainer, TaskTitle, TaskTime } from '../styles/Task.styles'
 
 interface TaskProps {
   name: string;
-  time: string;
+  completionTime: string;
 }
 
-const Task = ({ name, time }: TaskProps) => {
+const Task = ({ name, completionTime }: TaskProps) => {
   return (
     <TaskContainer>
       <TaskTitle>{name}</TaskTitle>
-      <TaskTime>{time}</TaskTime>
+      <TaskTime>{completionTime}</TaskTime>
     </TaskContainer>
   );
 }

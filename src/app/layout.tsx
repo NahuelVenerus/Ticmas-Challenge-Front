@@ -1,10 +1,10 @@
 import React from 'react';
 import StoreProvider from '@/store/StoreProvider';
-import './globals.css';
+import '../styles/globals.css';
 
 export const metadata = {
-  title: 'Tu aplicación',
-  description: 'Descripción de tu aplicación',
+  title: 'Planify',
+  description: 'Task Management Application',
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {

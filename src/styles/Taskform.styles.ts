@@ -20,6 +20,9 @@ export const TitleInput = styled.input`
     background-color: transparent;
     margin-bottom: 5vh;
 
+    &::placeholder {
+        color: #999;
+    }
     &:focus {
       border-bottom: 2px solid #007bff;
     }
@@ -32,7 +35,7 @@ export const DescriptionInput = styled.textarea`
     resize: none;
     padding: 2%;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 50px;
     font-size: 18px;
     outline: none;
 `;
