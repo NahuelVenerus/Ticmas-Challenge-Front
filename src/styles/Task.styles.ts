@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const TaskContainer = styled.div`
   width: 100%;
   max-width: 400px;
-  height: auto;
+  height: 6vw;
   max-height: 15vh;
-  padding: 2vw;
+  padding: 1vw 0 0 1vw;
   background-color: white;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -13,6 +13,7 @@ export const TaskContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  margin: 5px 0 5px 0;
 `;
 
 export const TaskTitle = styled.h3`

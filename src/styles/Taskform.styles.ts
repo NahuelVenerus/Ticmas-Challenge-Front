@@ -39,11 +39,3 @@ export const DescriptionInput = styled.textarea`
     font-size: 18px;
     outline: none;
 `;
-
-export const ButtonContainer = styled.div`
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    margin-top: 5vh;
-`;
-
