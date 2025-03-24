@@ -1,11 +1,9 @@
-"use client"
-
 import { configureStore } from "@reduxjs/toolkit";
-import exampleReducer from '../slices/exampleSlice'
+import taskReducer from "./slices/taskSlice";
 
 export const store = configureStore({
   reducer: {
-    example: exampleReducer,
+    tasks: taskReducer,
   },
 });
 

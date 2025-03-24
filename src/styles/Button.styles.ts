@@ -1,41 +1,28 @@
 import styled from "styled-components";
 
-export const Button = styled.button`
+interface ButtonProps {
+  bgColor?: string;
+  color?: string;
+  hoverColor?: string;
+  activeColor?: string;
+}
+
+export const Button = styled.button<ButtonProps>`
   padding: 0.75rem;
-  background-color: #4caf50;
-  color: white;
   font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  background-color: ${(props) => props.bgColor || '#4caf50'};  /* Color de fondo dinámico */
+  color: ${(props) => props.color || 'white'};  /* Color del texto dinámico */
 
   &:hover {
-    background-color: #45a049;
+    background-color: ${(props) => props.hoverColor || '#45a049'};  /* Color al pasar el mouse */
   }
 
   &:active {
-    background-color: #4caf50;
-  }
-`;
-
-export const SubmitButton = styled.button`
-  padding: 0.75rem;
-  background-color: #4caf50;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-
-  &:hover {
-    background-color: #45a049;
-  }
-
-  &:active {
-    background-color: #4caf50;
+    background-color: ${(props) => props.activeColor || '#4caf50'};  /* Color al hacer clic */
   }
 `;

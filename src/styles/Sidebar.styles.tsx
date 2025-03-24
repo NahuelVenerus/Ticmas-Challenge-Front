@@ -6,6 +6,7 @@ export const SidebarContainer = styled.div`
   left: 0;
   height: 100vh;
   width: 20vw;
+  min-width: 150px;
   background-color: #3498db;
   color: white;
   padding: 1rem;
@@ -13,6 +14,5 @@ export const SidebarContainer = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  z-index: 999;
 `;
 
