@@ -6,7 +6,7 @@ export const login = async (loginFormData: UserLoginDTO): Promise<ResponseObject
   try {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, loginFormData);
 
-    localStorage.setItem('token', response.data);
+    sessionStorage.setItem('token', response.data);
     
     return {
       success: true,

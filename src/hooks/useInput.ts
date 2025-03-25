@@ -1,10 +1,10 @@
 const { useState } = require("react");
 
-const useInput = () => {
+const useInput = <T extends HTMLInputElement | HTMLTextAreaElement>() => {
   const [value, setValue] = useState("");
 
-  const onChange = (e: React.FormEvent<HTMLInputElement>) => {
-    setValue((e.target as HTMLInputElement).value);
+  const onChange = (e: React.FormEvent<T>) => {
+    setValue((e.target as T).value);
   };
   return { onChange, setValue, value };
 };
