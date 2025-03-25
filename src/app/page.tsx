@@ -1,29 +1,30 @@
-"use client";
+"use client"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HomeTitle } from "../styles/Home.styles";
 
 export default function Home() {
   const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsClient(true);
-    const token = localStorage.getItem("token");
-    if (!token) router.push("/login");
-    else router.push('/home')
+    if (!sessionStorage.getItem('token')) {
+      router.push('/login');
+    } else {
+      setIsLoading(false);
+    }
   }, [router]);
 
-  if (!isClient) {
-    return null;
+  if (isLoading) {
+    return (
+      <HomeTitle>
+        <div>
+          <h1>Planify</h1>
+          <p>Verificando...</p>
+        </div>
+      </HomeTitle>
+    );
   }
 
-  return (
-    <HomeTitle>
-      <div>
-        <h1>Planify</h1>
-        <p>Planificando...</p>
-      </div>
-    </HomeTitle>
-  );
+  return null;
 }
