@@ -7,16 +7,19 @@ import { Button, ButtonContainer, StyledButtonContainer } from '../styles/Button
 import { clearCurrentTask } from '@/store/slices/currentTaskSlice';
 import { getUserTasks } from '@/services/getUserTasks';
 import { ResponseObject } from '../DTOs/responseDTO';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 
 const Sidebar = () => {
+  const user = useSelector((state: RootState) => state.user.loggedUser);
   const [tasks, setTasks] = useState<TaskDTO[]>([]);
   const [isInArchive, setIsInArchive] = useState<boolean>(false);
   const [isInCompleted, setIsInCompleted] = useState<boolean>(false);
 
   const fetchUserTasks = async () => {
     try {
-      const response: ResponseObject<TaskDTO[]> = await getUserTasks(1, isInArchive);
-      handleClearForm();
+      if (!user || !user.id) return;
+      const response: ResponseObject<TaskDTO[]> = await getUserTasks(user.id, isInArchive);
       if (response.success) {
         setTasks(response.data);
       } else {
@@ -39,7 +42,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchUserTasks();
-  }, [handleClearForm, isInArchive, isInCompleted]);
+  }, [isInArchive, isInCompleted]);
 
   const today: Date = new Date();
 
@@ -55,12 +58,12 @@ const Sidebar = () => {
           {!isInArchive ? "Archivadas" : "No archivadas"}
         </Button>
         <Button type="button" bgColor="#f1c40f" hoverColor="#e67e22" onClick={handleCompletedCharge}>
-          {isInCompleted ? "Completadas" : "No completadas"}
+          {isInCompleted ? "Completadas" : "Incompletas"}
         </Button>
       </StyledButtonContainer>
       <div style={{ maxHeight: '60vh', overflowY: 'auto', width: "100%" }}>
         {tasks.map(element => (
-          <Task name={element.title} completionTime={dateToString(today)} key={element.id} />
+          <Task task={element} key={element.id} />
         ))}
       </div>
     </SidebarContainer>

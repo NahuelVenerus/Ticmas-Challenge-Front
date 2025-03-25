@@ -8,9 +8,16 @@ import { FormContainer, FormWrapper } from "@/src/styles/Form.styles";
 import { Button } from "@/src/styles/Button.styles";
 import { login } from "@/services/login";
 import { ResponseObject } from "@/src/DTOs/responseDTO";
+import { UserSignupDTO } from "@/src/DTOs/userSignupDTO";
+import { getLoggedUser } from "@/services/getLoggedUser";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoggedUser } from "@/store/slices/userSlice";
+import { RootState } from "@/store/store";
 
 const Login = () => {
   const router = useRouter();
+  const dispatch = useDispatch()
+  const user = useSelector((state: RootState) => state.user.loggedUser)
   const email = useInput();
   const password = useInput();
   const [errors, setErrors] = useState<UserLoginDTO>({ email: "", password: "" });
@@ -38,10 +45,22 @@ const Login = () => {
     if (hasError) return;
 
     const loginResult: ResponseObject<string> = await login({ email: email.value, password: password.value } as UserLoginDTO);
-
-    if (loginResult.success) router.push('/home');
+    
+    
+    
+    if (loginResult.success){
+      const response: ResponseObject<UserSignupDTO | string> = await getLoggedUser(email.value);
+      if (response.success && typeof response.data !== "string") {
+        dispatch(setLoggedUser(response.data));
+        sessionStorage.setItem('token', loginResult.data);
+      }
+      if(user) router.push('/home');
+      
+    }
     else {
-      setSendError("Los datos ingresados son incorrectos")
+      setSendError("Los datos ingresados son incorrectos");
+      
+      
     };
     email.setValue("");
     password.setValue("");

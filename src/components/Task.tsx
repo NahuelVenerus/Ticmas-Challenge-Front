@@ -1,16 +1,24 @@
 import React from 'react';
 import { TaskContainer, TaskTitle, TaskTime } from '../styles/Task.styles'
+import { useDispatch } from 'react-redux';
+import { setCurrentTask } from '@/store/slices/currentTaskSlice';
+import { TaskDTO } from '../DTOs/taskDTO';
 
 interface TaskProps {
-  name: string;
-  completionTime: string;
+  task: TaskDTO
 }
 
-const Task = ({ name, completionTime }: TaskProps) => {
+const Task = ({ task }: TaskProps) => {
+  const dispatch = useDispatch();
+
+  const handleSelect = () => {
+    dispatch(setCurrentTask(task))
+  }
+
   return (
-    <TaskContainer>
-      <TaskTitle>{name}</TaskTitle>
-      <TaskTime>{completionTime}</TaskTime>
+    <TaskContainer onClick={handleSelect}>
+      <TaskTitle>{task.title}</TaskTitle>
+      <TaskTime>{task.description}</TaskTime>
     </TaskContainer>
   );
 }

@@ -14,6 +14,7 @@ export const TaskContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin: 5px 0 5px 0;
+  cursor: pointer;
 `;
 
 export const TaskTitle = styled.h3`

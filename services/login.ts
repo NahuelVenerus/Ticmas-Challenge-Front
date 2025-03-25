@@ -5,8 +5,6 @@ import axios, { AxiosError } from "axios";
 export const login = async (loginFormData: UserLoginDTO): Promise<ResponseObject<string>> => {
   try {
     const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, loginFormData);
-
-    sessionStorage.setItem('token', response.data);
     
     return {
       success: true,

@@ -6,6 +6,7 @@ interface userState {
 }
 
 const defaultUser: UserSignupDTO = {
+    id: 0,
     name: "",
     lastname: "",
     email: "",

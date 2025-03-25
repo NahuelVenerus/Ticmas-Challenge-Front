@@ -4,10 +4,7 @@ import axios, { AxiosError } from "axios";
 
 export const createTask = async (task: TaskDTO): Promise<ResponseObject<TaskDTO>> => {
     try {
-        console.log("Task to create: ", task);
-        
         const response: TaskDTO = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/create`, task);
-        console.log("Created Task: ", response);
         
         return {
             success: true,
