@@ -16,6 +16,7 @@ const Sidebar = () => {
   const fetchUserTasks = async () => {
     try {
       const response: ResponseObject<TaskDTO[]> = await getUserTasks(1, isInArchive);
+      handleClearForm();
       if (response.success) {
         setTasks(response.data);
       } else {
@@ -38,7 +39,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     fetchUserTasks();
-  }, [isInArchive, isInCompleted]);
+  }, [handleClearForm, isInArchive, isInCompleted]);
 
   const today: Date = new Date();
 

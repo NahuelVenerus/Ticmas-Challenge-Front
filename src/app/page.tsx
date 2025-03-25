@@ -9,7 +9,7 @@ export default function Home() {
 
   useEffect(() => {
     setIsClient(true);
-    const token = sessionStorage.getItem("token");
+    const token = localStorage.getItem("token");
     if (!token) router.push("/login");
     else router.push('/home')
   }, [router]);

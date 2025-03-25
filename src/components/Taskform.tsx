@@ -9,7 +9,8 @@ const TaskForm = () => {
   const description = useInput();
   const today = new Date();
 
-  const handleSubmitCreateTask = () => {
+  const handleSubmitCreateTask = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if(!title.value || !description.value) return;
     createTask({
       title: title.value, 
@@ -19,10 +20,12 @@ const TaskForm = () => {
       completionDate: today,
       userId: 1
     })
+    title.setValue("");
+    description.setValue("");
   }
   
   return (
-    <TaskFormContainer onSubmit={() => handleSubmitCreateTask()}>
+    <TaskFormContainer onSubmit={handleSubmitCreateTask}>
       <TitleInput
         type="text"
         value={title.value}
