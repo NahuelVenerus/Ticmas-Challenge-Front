@@ -27,7 +27,7 @@ export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObj
       }
       return {
         success: false,
-        data: "No se pudo crear la cuenta debido a un problema con el servidor. Inténtelo nuevamente más tarde."
+        data: error.response?.statusText || "No se pudo crear la cuenta debido a un problema con el servidor. Inténtelo nuevamente más tarde."
       };
     } else {
       return {

@@ -6,6 +6,7 @@ export const createTask = async (task: TaskDTO): Promise<ResponseObject<TaskDTO 
     if(!task.title || !task.description) return {success: false, data: "Debe ingresar título y descripción"};
     if(!task.userId) return {success: false, data: "No se encontró el usuario creador de la tarea"};
     try {
+        console.log("Estoy en createTask");
         const response: ResponseObject<TaskDTO> = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/create`, task);
         
         return {

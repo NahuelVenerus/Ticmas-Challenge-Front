@@ -53,6 +53,7 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
   
   const handleSubmitTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log("En handleSubmitTask");    
     if(isEditing && !currentTask?.id || !user?.id) {
       Swal.fire({
         icon: "error",
@@ -61,19 +62,23 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
       })
       return;
     }
-    if (isEditing && currentTask?.id) {
-      const response: ResponseObject<TaskDTO | string> = await editTask({
-        id: currentTask?.id,
-        title: title.value,
-        description: description.value,
-      })
-      if (typeof response.data === 'string') Swal.fire({
-        icon: "error",
-        text: response.data,
-        confirmButtonText: 'Aceptar'
-      })
-      clearFields();
+    if (isEditing) {
+      if(currentTask?.id) {
+        console.log("editing task");
+        
+        const response: ResponseObject<TaskDTO | string> = await editTask({
+          id: currentTask?.id,
+          title: title.value,
+          description: description.value,
+        })
+        if (typeof response.data === 'string') Swal.fire({
+          icon: "error",
+          text: response.data,
+          confirmButtonText: 'Aceptar'
+        })
+      }
     } else {
+      console.log("creating task");
       const response = await createTask({
         title: title.value,
         description: description.value,
@@ -86,9 +91,9 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
         icon: "error",
         text: response.data,
         confirmButtonText: "Aceptar"
-      });
-      clearFields();
+      });      
     }    
+    clearFields();
     setUpdateSidebar((prev) => !prev);
   };
 
@@ -186,7 +191,6 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
             type="submit" 
             bgColor="#4caf50" 
             hoverColor="#45a049"
-            onClick={clearFields}
             disabled={
               title.value === currentTask.title && description.value === currentTask.description && isCompleted === currentTask.isCompleted || 
               !title.value || !description.value} >
@@ -198,7 +202,6 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
             bgColor="#4caf50" 
             hoverColor="#45a049"
             disabled={!title.value || !description.value}
-            onClick={clearFields}
             >
               Crear Tarea
             </Button>
