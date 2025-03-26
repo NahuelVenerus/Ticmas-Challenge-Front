@@ -8,6 +8,8 @@ export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObj
     return { success: false, data: "Debe ingresar todos los datos para crear su cuenta" }
   }
   try {
+    console.log("Form Data: ", signupFormData);
+    
     const response: ResponseObject<string> = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/create`, signupFormData);
 
     await login({ email: signupFormData.email, password: signupFormData.password });
