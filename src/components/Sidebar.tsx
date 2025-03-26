@@ -59,8 +59,8 @@ const Sidebar = ({ updateSidebar }: SidebarProps) => {
         <StyledToggleButton
           type='button'
           isActive={isInArchive}
-          activeBgColor='#f1c40f'
-          inactiveBgColor='#e67e22'
+          activeBgColor='#e67e22'
+          inactiveBgColor='#f1c40f'
           hoverColor='#e67e22'
           color='black'
           onClick={handleArchiveCharge}
@@ -70,8 +70,8 @@ const Sidebar = ({ updateSidebar }: SidebarProps) => {
         <StyledToggleButton
           type='button'
           isActive={isInCompleted}
-          activeBgColor='#f1c40f'
-          inactiveBgColor='#e67e22'
+          activeBgColor='#e67e22'
+          inactiveBgColor='#f1c40f'
           hoverColor='#e67e22'
           color='black'
           onClick={handleCompletedCharge}

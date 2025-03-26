@@ -98,10 +98,9 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
     archiveTask(currentTask.id);
     const updatedIsArchived: boolean = !isArchived;
     setIsArchived(updatedIsArchived);
-    clearFields();
     setUpdateSidebar((prev) => !prev);
   };
-
+  
   const handleDeleteTask = async () => {
     if (!currentTask || !currentTask.id) return;
     const result = await Swal.fire({
