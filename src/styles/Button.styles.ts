@@ -8,6 +8,14 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
+interface ToggleButtonProps {
+  activeBgColor?: string;
+  inactiveBgColor?: string;
+  hoverColor?: string;
+  color?: string;
+  onToggle?: (isActive: boolean) => void;
+}
+
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -52,3 +60,27 @@ export const Button = styled.button<ButtonProps>`
 `;
 
 Button.shouldForwardProp = (prop: string) => !['bgColor', 'hoverColor', 'activeColor', 'color'].includes(prop);
+
+
+export const StyledToggleButton = styled.button<ToggleButtonProps & { isActive: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: ${({ isActive, activeBgColor, inactiveBgColor }) =>
+    isActive ? activeBgColor || '#27ae60' : inactiveBgColor || '#e74c3c'};
+  color: ${({ color }) => color || 'white'};
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 6vh;
+  width: 100%;
+  flex-grow: 1;
+
+  &:hover {
+    background-color: ${({ hoverColor }) => hoverColor || '#c0392b'};
+  }
+`;

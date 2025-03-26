@@ -8,6 +8,7 @@ export interface TaskDTO {
 }
 
 export interface FormTaskDTO {
+    id: number,
     title: string,
     description: string,
 }

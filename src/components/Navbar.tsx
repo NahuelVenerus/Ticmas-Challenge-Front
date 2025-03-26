@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { logoutUser } from "@/store/slices/userSlice";
 import LogoutModal from "./LogoutModal";
 import { 
-  Avatar, 
   NavbarContainer, 
   UserInfo, 
   Logo, 
@@ -59,11 +58,10 @@ const Navbar = ({ name = "Guest", picture }: NavbarProps) => {
           ref={dropdownRef}
           onClick={() => setDropdownOpen(!isDropdownOpen)}
         >
-          <UserName>Bienvenido, {name} !</UserName>
-          <Avatar style={{ backgroundImage: `url(${picture})` }} />
+          <UserName>Bienvenido, {name} !</UserName>          
           {isDropdownOpen && (
             <DropdownMenu>
-              <DropdownItem>Perfil</DropdownItem>
+              {/* <DropdownItem>Perfil</DropdownItem> */}
               <DropdownItem onClick={() => setModalOpen(true)}>Cerrar sesión</DropdownItem>
             </DropdownMenu>
           )}

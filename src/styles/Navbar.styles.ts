@@ -28,7 +28,7 @@ export const UserInfo = styled.div`
   color: white;
   background-color: #3498db;
   padding: 0.5rem 2rem;
-  border-radius: 0 0 0 40px;
+  border-radius: 0 0 0 35px;
   width: 11vw;
   height: 9vh;
   position: absolute;
@@ -44,22 +44,15 @@ export const UserName = styled.span`
   color: white;
 `;
 
-export const Avatar = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  object-fit: cover;
-`;
-
 export const DropdownMenu = styled.div`
   position: absolute;
-  top: 50px;
+  top: 60px;
   right: 0;
   background: #3498db;
-  border-radius: 8px;
+  border-radius: 0 0 0 40px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 10px;
-  min-width: 150px;
+  width: 9vw;
   display: flex;
   flex-direction: column;
   overflow: show;
@@ -69,6 +62,8 @@ export const DropdownItem = styled.div`
   padding: 10px;
   cursor: pointer;
   &:hover {
-    background: #f0f0f0;
+    transition: 0.3s;
+    border-radius: 0 0 0 30px;
+    transform: scale(1.1);
   }
 `;

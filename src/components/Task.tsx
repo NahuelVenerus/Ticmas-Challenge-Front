@@ -10,6 +10,7 @@ interface TaskProps {
 
 const Task = ({ task }: TaskProps) => {
   const dispatch = useDispatch();
+
   return (
     <TaskContainer onClick={() => dispatch(setCurrentTask(task))}>
       <TaskTitle>{task.title}</TaskTitle>

@@ -14,6 +14,7 @@ import { HomeTitle } from '../styles/Home.styles';
 import { archiveTask } from '@/services/archiveTask';
 import { clearCurrentTask } from '@/store/slices/currentTaskSlice';
 import { deleteTask } from '@/services/deleteTask';
+import { completeTask } from '@/services/completeTask';
 
 interface TaskFormProps {
   setUpdateSidebar: React.Dispatch<React.SetStateAction<boolean>>;
@@ -25,36 +26,36 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
   const currentTask = useSelector((state: RootState) => state.currentTask.currentTask);
   const title = useInput();
   const description = useInput();
+  const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [isArchived, setIsArchived] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {
     const editing = currentTask?.id !== 0;
-    setIsEditing(editing);
-  
+    setIsEditing(editing);  
     if (!editing) {
       title.setValue('');
       description.setValue('');
+      setIsCompleted(false);
       setIsArchived(false);
     } else if (currentTask) {
+      console.log(isCompleted, " | ", currentTask.isCompleted);
+      
       title.setValue(currentTask.title);
       description.setValue(currentTask.description);
       setIsArchived(currentTask.isArchived);
+      setIsCompleted(currentTask.isCompleted);
     }
   }, [currentTask]);
   
   const handleSubmitTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!title.value || !description.value || !user?.id) return;
-
-    if (isEditing) {
+    if (!title.value || !description.value || !currentTask?.id || !user?.id) return;
+    if (isEditing) {      
       const response: ResponseObject<TaskDTO | string> = await editTask({
         id: currentTask?.id,
         title: title.value,
         description: description.value,
-        isArchived,
-        isCompleted: false,
-        userId: user?.id,
       })
       if (typeof response.data === 'string') Swal.fire({
         icon: "error",
@@ -62,18 +63,22 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
         confirmButtonText: 'Aceptar'
       })
     } else {
-      createTask({
+      const response = await createTask({
         title: title.value,
         description: description.value,
         isArchived,
-        isCompleted: false,
+        isCompleted,
         userId: user?.id,
       });
+      if(typeof response.data === 'string' )
+      Swal.fire({
+        icon: "error",
+        text: response.data,
+        confirmButtonText: "Aceptar"
+      });
     }
+
     dispatch(clearCurrentTask());
-    title.setValue('');
-    description.setValue('');
-    setIsArchived(false);
     setUpdateSidebar((prev) => !prev);
   };
 
@@ -111,16 +116,56 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
     } else return;
   }
 
+  const handleComplete = async () => {
+    if (!currentTask?.id) return;
+    setIsCompleted((prev) => !prev);
+  
+    const response = await completeTask(currentTask.id);
+    console.log("response: ", response);    
+  
+    if (!response.success) {
+      setIsCompleted((prev) => !prev);
+      Swal.fire({
+        icon: "error",
+        text: response.data,
+        confirmButtonText: "Aceptar",
+      });
+    }
+  };  
+
   return (
     <div>
       {currentTask ? (
         <TaskFormContainer onSubmit={handleSubmitTask}>
+          <ButtonContainer>
           <TitleInput
             type="text"
             value={title.value}
             onChange={title.onChange}
             placeholder="Título"
           />
+          {isCompleted ? (
+            <Button
+            type='button'
+            bgColor="#80ed99" 
+            color="white"
+            style={{margin: "0 5% ", width: "30%"}}
+            onClick={handleComplete}
+            disabled={!isEditing}
+            >Completada</Button>
+          ) : (
+            <Button
+            type='button'
+            bgColor="white" 
+            color="grey"
+            hoverColor="#45a049"
+            activeColor='#7ae582'
+            style={{margin: "0 5% ", width: "30%"}}
+            onClick={handleComplete}
+            disabled={!isEditing}
+            >Completar</Button>
+          )}
+          </ButtonContainer>
           <DescriptionInput
             placeholder="Descripción"
             value={description.value}
@@ -134,9 +179,8 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
             bgColor="#4caf50" 
             hoverColor="#45a049"
             disabled={
-              title.value === currentTask.title && description.value === currentTask.description || 
-              !title.value || !description.value
-              }>
+              title.value === currentTask.title && description.value === currentTask.description && isCompleted === currentTask.isCompleted || 
+              !title.value || !description.value} >
               Editar Tarea
             </Button>
             ) : (
