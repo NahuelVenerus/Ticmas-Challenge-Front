@@ -23,7 +23,7 @@ const Signup = () => {
     name: "",
     lastname: "",
   });
-  const [sendError, setSendError] = useState("");
+  const [sendError, setSendError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,6 +74,7 @@ const Signup = () => {
 
     if (signupResult.success) router.push('/home');
     else {
+      console.log(signupResult.data);
       setSendError(signupResult.data)
     };
     name.setValue("");
@@ -131,18 +132,26 @@ const Signup = () => {
           onChange={confirmPassword.onChange}
           placeholder="Confirma tu contraseña"
           error={errors.confirmPassword}
-          />
-        {sendError && <div style={{ color: "red", fontSize: "0.875rem" }}>{sendError}</div>}
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
-            <Button type="submit">Ingresar</Button>
-
-            <p style={{ width: "50%", textAlign: "right" }}>
-              ¿Ya tienes cuenta?
-              <a onClick={handleRouteLogin} style={{ color: "#007bff", cursor: "pointer", textDecoration: "underline" }}>
-                {"\n"}Inicia Sesión
-              </a>
-            </p>
+        />
+        {sendError && (
+          <div style={{ color: "red", fontSize: "0.875rem" }}>
+            {Array.isArray(sendError) ? (
+              sendError.map((err, index) => <div key={index}>{`- ${err}`}</div>)
+            ) : (
+              <div>{sendError}</div>
+            )}
           </div>
+        )}
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%" }}>
+          <Button type="submit">Ingresar</Button>
+
+          <p style={{ width: "50%", textAlign: "right" }}>
+            ¿Ya tienes cuenta?
+            <a onClick={handleRouteLogin} style={{ color: "#007bff", cursor: "pointer", textDecoration: "underline" }}>
+              {"\n"}Inicia Sesión
+            </a>
+          </p>
+        </div>
       </FormWrapper>
     </FormContainer>
   );

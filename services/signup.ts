@@ -25,6 +25,13 @@ export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObj
           data: "Ya existe una cuenta con esa dirección de correo electrónico. Por favor, intenta con otra o accede a tu cuenta si ya tienes una."
         };
       }
+      if (error.response?.status === 400) {
+        console.error(error.response.data.message)
+        return {
+          success: false,
+          data: error.response.data.message
+        };
+      }
       return {
         success: false,
         data: error.response?.statusText || "No se pudo crear la cuenta debido a un problema con el servidor. Inténtelo nuevamente más tarde."
