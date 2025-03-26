@@ -53,7 +53,6 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
   
   const handleSubmitTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("En handleSubmitTask");    
     if(isEditing && !currentTask?.id || !user?.id) {
       Swal.fire({
         icon: "error",
@@ -64,8 +63,6 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
     }
     if (isEditing) {
       if(currentTask?.id) {
-        console.log("editing task");
-        
         const response: ResponseObject<TaskDTO | string> = await editTask({
           id: currentTask?.id,
           title: title.value,
@@ -78,7 +75,6 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
         })
       }
     } else {
-      console.log("creating task");
       const response = await createTask({
         title: title.value,
         description: description.value,
