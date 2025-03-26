@@ -11,7 +11,6 @@ const defaultTask: TaskDTO = {
   description: "",
   isArchived: false,
   isCompleted: false,
-  completionDate: undefined,
   userId: 0
 }
 
