@@ -61,8 +61,8 @@ const Signup = () => {
       setErrors((prev) => ({ ...prev, lastname: "El apellido es obligatorio." }));
       hasError = true;
     }
-
-    if(confirmPassword !== password) {
+    
+    if(confirmPassword.value !== password.value) {
       setErrors((prev) => ({ ...prev, password:  "Las contraseñas deben ser iguales", confirmPassword: "Las contraseñas deben ser iguales" }));
       hasError = true;
     }
