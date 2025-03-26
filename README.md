@@ -31,11 +31,11 @@ El **Frontend** de *Planify* es la interfaz de usuario que permite a los usuario
 
 2. **Instalar dependencias**:
 
-    con npm
+    con **npm**
 
     npm install
 
-    o con yarn:
+    o con **yarn**:
 
     yarn install
 
@@ -49,7 +49,7 @@ El **Frontend** de *Planify* es la interfaz de usuario que permite a los usuario
     
     npm run dev
 
-    o con yarn:
+    o con **yarn**:
 
     yarn dev
 
