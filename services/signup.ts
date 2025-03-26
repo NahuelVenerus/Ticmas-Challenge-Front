@@ -3,8 +3,8 @@ import { UserSignupDTO } from "@/src/DTOs/userSignupDTO";
 import axios, { AxiosError } from "axios";
 import { login } from "./login";
 
-export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObject<string>> => {
-  if(!signupFormData.name || !signupFormData.lastname || !signupFormData.email || !signupFormData.password || !!signupFormData.confirmPassword) {
+export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObject<string>> => {  
+  if(!signupFormData.name || !signupFormData.lastname || !signupFormData.email || !signupFormData.password || !signupFormData.confirmPassword) {
     return {success: false, data: "Debe ingresar todos los datos para crear su cuenta"}
   }
   try {

@@ -3,8 +3,6 @@ import axios, { AxiosError } from "axios";
 
 export const completeTask = async (taskId: number): Promise<ResponseObject<string>> => {
     try {
-        console.log("In complete Task: ", taskId);
-        
         const response = await axios.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/complete/${taskId}`);
         return {
             success: true,

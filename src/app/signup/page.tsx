@@ -74,7 +74,7 @@ const Signup = () => {
 
     if (signupResult.success) router.push('/home');
     else {
-      setSendError("Ya existe una cuenta con esa dirección de correo electrónico. Por favor, intenta con otra o accede a tu cuenta si ya tienes una.")
+      setSendError(signupResult.data)
     };
     name.setValue("");
     lastname.setValue("");

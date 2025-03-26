@@ -23,12 +23,8 @@ const Sidebar = ({ updateSidebar }: SidebarProps) => {
   const [isInCompleted, setIsInCompleted] = useState<boolean>(false);
   const [isAscOrder, setIsAscOrder] = useState<boolean>(true);
 
-  console.log(`Estoy en ${isInArchive ? "Archivados" : "No archivados"}`);
-  console.log(`Estoy en ${isInCompleted ? "Completados" : "Pendientes"}`);
-
   const fetchUserTasks = async () => {
     if (!user || !user.id) return;
-    console.log("is in completed: ", isInCompleted, " ", typeof isInCompleted);
     const response: ResponseObject<TaskDTO[] | string> = await getUserTasks(user.id, isInCompleted, isAscOrder, isInArchive);
     if (response.success && typeof response.data !== 'string') setTasks(response.data);
 

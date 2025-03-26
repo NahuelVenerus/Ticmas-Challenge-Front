@@ -39,8 +39,6 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
       setIsCompleted(false);
       setIsArchived(false);
     } else if (currentTask) {
-      console.log(isCompleted, " | ", currentTask.isCompleted);
-      
       title.setValue(currentTask.title);
       description.setValue(currentTask.description);
       setIsArchived(currentTask.isArchived);
@@ -121,8 +119,6 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
     setIsCompleted((prev) => !prev);
   
     const response = await completeTask(currentTask.id);
-    console.log("response: ", response);    
-  
     if (!response.success) {
       setIsCompleted((prev) => !prev);
       Swal.fire({
