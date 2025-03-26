@@ -74,11 +74,6 @@ const Signup = () => {
 
     if (signupResult.success) router.push('/home');
     else setSendError(signupResult.data)
-    name.setValue("");
-    lastname.setValue("");
-    email.setValue("");
-    password.setValue("");
-    confirmPassword.setValue("");
   };
 
   const handleRouteLogin = () => {
