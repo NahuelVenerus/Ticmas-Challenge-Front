@@ -30,12 +30,17 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
   const [isArchived, setIsArchived] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
+  const clearFields = () => {
+    title.setValue('');
+    description.setValue('');
+    dispatch(clearCurrentTask());
+  }
+
   useEffect(() => {
     const editing = currentTask?.id !== 0;
     setIsEditing(editing);  
     if (!editing) {
-      title.setValue('');
-      description.setValue('');
+      clearFields();
       setIsCompleted(false);
       setIsArchived(false);
     } else if (currentTask) {
@@ -48,8 +53,15 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
   
   const handleSubmitTask = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!title.value || !description.value || !currentTask?.id || !user?.id) return;
-    if (isEditing) {      
+    if(isEditing && !currentTask?.id || !user?.id) {
+      Swal.fire({
+        icon: "error",
+        text: "No se seleccionó ninguna tarea",
+        confirmButtonText: "Aceptar"
+      })
+      return;
+    }
+    if (isEditing && currentTask?.id) {
       const response: ResponseObject<TaskDTO | string> = await editTask({
         id: currentTask?.id,
         title: title.value,
@@ -60,6 +72,7 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
         text: response.data,
         confirmButtonText: 'Aceptar'
       })
+      clearFields();
     } else {
       const response = await createTask({
         title: title.value,
@@ -74,9 +87,8 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
         text: response.data,
         confirmButtonText: "Aceptar"
       });
-    }
-
-    dispatch(clearCurrentTask());
+      clearFields();
+    }    
     setUpdateSidebar((prev) => !prev);
   };
 
@@ -85,7 +97,7 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
     archiveTask(currentTask.id);
     const updatedIsArchived: boolean = !isArchived;
     setIsArchived(updatedIsArchived);
-    clearCurrentTask();
+    clearFields();
     setUpdateSidebar((prev) => !prev);
   };
 
@@ -102,7 +114,7 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
     if (result.isConfirmed) {
       const response: ResponseObject<boolean | string> = await deleteTask(currentTask?.id);
       setUpdateSidebar((prev) => !prev);
-      clearCurrentTask();
+      clearFields();
       if (typeof response.data === 'string') {
         Swal.fire({
           icon: 'error',
@@ -174,6 +186,7 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
             type="submit" 
             bgColor="#4caf50" 
             hoverColor="#45a049"
+            onClick={clearFields}
             disabled={
               title.value === currentTask.title && description.value === currentTask.description && isCompleted === currentTask.isCompleted || 
               !title.value || !description.value} >
@@ -184,7 +197,9 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
             type="submit" 
             bgColor="#4caf50" 
             hoverColor="#45a049"
-            disabled={!title.value || !description.value}>
+            disabled={!title.value || !description.value}
+            onClick={clearFields}
+            >
               Crear Tarea
             </Button>
             )}

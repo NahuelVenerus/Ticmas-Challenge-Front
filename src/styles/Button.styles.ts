@@ -13,7 +13,6 @@ interface ToggleButtonProps {
   inactiveBgColor?: string;
   hoverColor?: string;
   color?: string;
-  onToggle?: (isActive: boolean) => void;
 }
 
 export const ButtonContainer = styled.div`
