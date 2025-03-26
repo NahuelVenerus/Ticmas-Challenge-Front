@@ -8,6 +8,7 @@ export const TaskFormContainer = styled.form`
     min-height: 70vh;
     margin: 5vw 5vw 0 25vw; 
     max-width: 1500px;
+    justify-content: space-between;
 `;
 
 export const TitleInput = styled.input`
@@ -38,4 +39,9 @@ export const DescriptionInput = styled.textarea`
     border-radius: 50px;
     font-size: 18px;
     outline: none;
+    margin-bottom: 5vh;
+
+    @media (orientation: portrait) {
+        height: 60vh;
+    }
 `;

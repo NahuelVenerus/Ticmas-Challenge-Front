@@ -9,7 +9,7 @@ import { Button } from "@/src/styles/Button.styles";
 import { login } from "@/services/login";
 import { ResponseObject } from "@/src/DTOs/responseDTO";
 import { UserSignupDTO } from "@/src/DTOs/userSignupDTO";
-import { getLoggedUser } from "@/services/getLoggedUser";
+import { getLoggedUserByEmail } from "@/services/getLoggedUserByEmail";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoggedUser } from "@/store/slices/userSlice";
 import { RootState } from "@/store/store";
@@ -49,7 +49,7 @@ const Login = () => {
     
     
     if (loginResult.success){
-      const response: ResponseObject<UserSignupDTO | string> = await getLoggedUser(email.value);
+      const response: ResponseObject<UserSignupDTO | string> = await getLoggedUserByEmail(email.value);
       if (response.success && typeof response.data !== "string") {
         dispatch(setLoggedUser(response.data));
         sessionStorage.setItem('token', loginResult.data);

@@ -11,6 +11,7 @@ export const NavbarContainer = styled.nav`
   align-items: center;
   background: transparent;
   z-index: 1000;
+  overflox: hidden;
 `;
 
 export const Logo = styled.h1`
@@ -28,8 +29,8 @@ export const UserInfo = styled.div`
   background-color: #3498db;
   padding: 0.5rem 2rem;
   border-radius: 0 0 0 40px;
-  width: 9vw;
-  height: 7vh;
+  width: 11vw;
+  height: 9vh;
   position: absolute;
   top: 0;
   right: 0;
@@ -61,6 +62,7 @@ export const DropdownMenu = styled.div`
   min-width: 150px;
   display: flex;
   flex-direction: column;
+  overflow: show;
 `;
 
 export const DropdownItem = styled.div`

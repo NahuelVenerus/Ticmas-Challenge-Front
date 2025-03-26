@@ -3,24 +3,25 @@ import { UserLoginDTO } from "@/src/DTOs/userLoginDTO";
 import axios, { AxiosError } from "axios";
 
 export const login = async (loginFormData: UserLoginDTO): Promise<ResponseObject<string>> => {
+  if(!loginFormData.email || !loginFormData.password) return {success: false, data: "Debe ingresar email y contraseña"}
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, loginFormData);
+    const response: ResponseObject<string> = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, loginFormData);
     
     return {
       success: true,
-      data: "Token created correctly"
+      data: response.data
     };
 
-  } catch (error: unknown) {
+  } catch (error) {
     if (error instanceof AxiosError) {
       return {
         success: false,
-        data: error.response?.data?.error || error.message || "Error desconocido"
+        data: "No se pudo iniciar sesión. Inténtelo nuevamente más tarde."
       };
     } else {
       return {
         success: false,
-        data: "Error inesperado"
+        data: "Ocurrió un error inesperado. Inténtelo nuevamente más tarde."
       };
     }
   }

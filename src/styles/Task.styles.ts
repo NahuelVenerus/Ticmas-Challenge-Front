@@ -1,7 +1,15 @@
 import styled from 'styled-components';
 
-export const TaskContainer = styled.div`
+export const TasksScroll = styled.div`
+  max-height: 60vh;
+  overflow-y: auto;
   width: 100%;
+  scrollbar-color: #badc58 #3498db;
+`;
+
+
+export const TaskContainer = styled.div`
+  width: 95%;
   max-width: 400px;
   height: 6vw;
   max-height: 15vh;

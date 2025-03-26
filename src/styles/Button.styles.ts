@@ -5,6 +5,7 @@ interface ButtonProps {
   hoverColor?: string;
   activeColor?: string;
   color?: string;
+  disabled?: boolean;
 }
 
 export const ButtonContainer = styled.div`
@@ -14,37 +15,39 @@ export const ButtonContainer = styled.div`
   margin: 1vh;
 `;
 
-export const StyledButtonContainer = styled(ButtonContainer)`
-  justify-content: center;
-  align-items: center;
+export const ButtonContainerColumn = styled(ButtonContainer)`
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
   width: 100%;
-  margin-bottom: 2vh;
 `;
 
 
 export const Button = styled.button<ButtonProps>`
-display: flex;
-justify-content: center;
-align-items: center;
-padding: 0.75rem;
-background-color: ${({ bgColor }) => bgColor || '#4caf50'};
-color: ${({ color }) => color || 'white'};
-font-size: 1rem;
-font-weight: 600;
-border: none;
-border-radius: 8px;
-cursor: pointer;
-transition: background-color 0.3s ease;
-height: 6vh;
-width: 100%;
-flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: ${({ bgColor, disabled }) => disabled ? 'grey' : bgColor || '#e74c3c'};
+  color: ${({ color, disabled }) => disabled ? 'light-grey' : color || 'white'};
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 6vh;
+  width: 100%;
+  flex-grow: 1;
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: ${({ hoverColor }) => hoverColor || '#45a049'};
+    background-color: ${({ hoverColor, disabled }) => (disabled ? 'grey' : hoverColor || '#c0392b')};
   }
 
   &:active {
-    background-color: ${({ activeColor }) => activeColor || '#4caf50'};
+    background-color: ${({ activeColor, disabled }) => (disabled ? 'grey' : activeColor || '#e74c3c')};desactivado
   }
 `;
 

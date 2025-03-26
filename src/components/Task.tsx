@@ -10,13 +10,8 @@ interface TaskProps {
 
 const Task = ({ task }: TaskProps) => {
   const dispatch = useDispatch();
-
-  const handleSelect = () => {
-    dispatch(setCurrentTask(task))
-  }
-
   return (
-    <TaskContainer onClick={handleSelect}>
+    <TaskContainer onClick={() => dispatch(setCurrentTask(task))}>
       <TaskTitle>{task.title}</TaskTitle>
       <TaskTime>{task.description}</TaskTime>
     </TaskContainer>

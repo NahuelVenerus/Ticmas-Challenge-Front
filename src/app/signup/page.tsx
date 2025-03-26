@@ -3,10 +3,10 @@ import { useState } from "react";
 import useInput from "../../hooks/useInput";
 import FormInput from "../../components/FormInput";
 import { Button } from "@/src/styles/Button.styles";
-import { FormWrapper, Form, FormContainer } from "@/src/styles/Form.styles";
+import { FormWrapper, FormContainer } from "@/src/styles/Form.styles";
 import { useRouter } from "next/navigation";
 import { UserSignupDTO } from "@/src/DTOs/userSignupDTO";
-import { signup } from "@/services/singup";
+import { signup } from "@/services/signup";
 import { ResponseObject } from "@/src/DTOs/responseDTO";
 
 const Signup = () => {

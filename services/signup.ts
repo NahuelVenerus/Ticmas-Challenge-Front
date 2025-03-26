@@ -4,8 +4,11 @@ import axios, { AxiosError } from "axios";
 import { login } from "./login";
 
 export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObject<string>> => {
+  if(!signupFormData.name || !signupFormData.lastname || !signupFormData.email || !signupFormData.password || !!signupFormData.confirmPassword) {
+    return {success: false, data: "Debe ingresar todos los datos para crear su cuenta"}
+  }
   try {
-    const response = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/create`, signupFormData);
+    const response: ResponseObject<string> = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/create`, signupFormData);
 
     await login({email: signupFormData.email, password: signupFormData.password});
     
@@ -18,12 +21,12 @@ export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObj
     if (error instanceof AxiosError) {
       return {
         success: false,
-        data: error.response?.data?.error || error.message || "Error desconocido"
+        data: "No se pudo crear la cuenta debido a un problema con el servidor. Inténtelo nuevamente más tarde."
       };
     } else {
       return {
         success: false,
-        data: "Error inesperado"
+        data: "Ocurrió un error inesperado. Inténtelo nuevamente más tarde."
       };
     }
   }

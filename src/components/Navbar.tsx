@@ -12,6 +12,7 @@ import {
   DropdownItem 
 } from "../styles/Navbar.styles";
 import { useRouter } from "next/navigation";
+import { clearCurrentTask } from "@/store/slices/currentTaskSlice";
 
 interface NavbarProps {
   name?: string;
@@ -45,6 +46,7 @@ const Navbar = ({ name = "Guest", picture }: NavbarProps) => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
+    dispatch(clearCurrentTask())
     setModalOpen(false);
     router.push('/login')
   };
@@ -57,7 +59,7 @@ const Navbar = ({ name = "Guest", picture }: NavbarProps) => {
           ref={dropdownRef}
           onClick={() => setDropdownOpen(!isDropdownOpen)}
         >
-          <UserName>{name}</UserName>
+          <UserName>Bienvenido, {name} !</UserName>
           <Avatar style={{ backgroundImage: `url(${picture})` }} />
           {isDropdownOpen && (
             <DropdownMenu>

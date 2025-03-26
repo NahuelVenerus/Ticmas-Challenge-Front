@@ -4,7 +4,6 @@ export interface TaskDTO {
     description: string,
     isArchived: boolean,
     isCompleted: boolean
-    completionDate?: Date,
     userId: number
 }
 
