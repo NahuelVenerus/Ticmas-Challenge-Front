@@ -62,6 +62,11 @@ const Signup = () => {
       hasError = true;
     }
 
+    if(confirmPassword !== password) {
+      setErrors((prev) => ({ ...prev, password:  "Las contraseñas deben ser iguales", confirmPassword: "Las contraseñas deben ser iguales" }));
+      hasError = true;
+    }
+
     if (hasError) return;
 
     const signupResult: ResponseObject<string> = await signup({
