@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# **Planify - Task Management App**
 
-## Getting Started
+## **Frontend**
 
-First, run the development server:
+### **Descripción**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+El **Frontend** de *Planify* es la interfaz de usuario que permite a los usuarios interactuar con la aplicación de manera intuitiva y eficiente. Desarrollado con **Next.js**, ofrece una experiencia fluida y responsiva en dispositivos de diferentes tamaños.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### **Características principales**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Interfaz de usuario atractiva**: Utiliza **StyledComponents** para ofrecer un diseño moderno y coherente en todas las páginas.
+- **Gestión del estado**: Implementa **Redux** para manejar el estado global de la aplicación, asegurando una experiencia consistente.
+- **Navegación optimizada**: Gracias a **Next.js**, las rutas y páginas se cargan de manera rápida y eficiente.
+- **Responsividad**: El diseño se adapta a diversos dispositivos, brindando una experiencia óptima tanto en móviles como en escritorios.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### **Tecnologías utilizadas**
 
-## Learn More
+- **Next.js**: Framework de React que facilita la creación de aplicaciones web escalables y de alto rendimiento.
+- **Redux**: Biblioteca para la gestión del estado de la aplicación.
+- **StyledComponents**: Herramienta para escribir estilos CSS en JavaScript, permitiendo un estilizado modular y dinámico.
+- **Axios**: Cliente HTTP para realizar solicitudes a la API del backend.
+- **Jest**: Framework de pruebas para garantizar la calidad y fiabilidad del código.
 
-To learn more about Next.js, take a look at the following resources:
+### **Instrucciones de instalación y ejecución**
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clonar el repositorio**:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   git clone https://github.com/usuario/planify-frontend.git
+   
+   cd planify-frontend
 
-## Deploy on Vercel
+2. **Instalar dependencias**:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    con npm
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    npm install
+
+    o con yarn:
+
+    yarn install
+
+3. **Configurar variables de entorno**:
+
+    NEXT_PUBLIC_API_BASE_URL
+
+4. **Ejecutar en desarrollo**:    
+
+    Con **npm**:
+    
+    npm run dev
+
+    o con yarn:
+
+    yarn dev
+
+5. **Ejecutar en producción**:
+
+    Con **npm**:
+
+    npm run build
+
+    npm start
+
+    O con **yarn**:
+
+    yarn build
+
+    yarn start
