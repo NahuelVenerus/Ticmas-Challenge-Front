@@ -26,7 +26,6 @@ export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObj
         };
       }
       if (error.response?.status === 400) {
-        console.error(error.response.data.message)
         return {
           success: false,
           data: error.response.data.message

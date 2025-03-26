@@ -73,10 +73,7 @@ const Signup = () => {
     } as UserSignupDTO);
 
     if (signupResult.success) router.push('/home');
-    else {
-      console.log(signupResult.data);
-      setSendError(signupResult.data)
-    };
+    else setSendError(signupResult.data)
     name.setValue("");
     lastname.setValue("");
     email.setValue("");
