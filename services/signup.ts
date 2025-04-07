@@ -1,14 +1,15 @@
 import { ResponseObject } from "@/src/DTOs/responseDTO";
 import { UserSignupDTO } from "@/src/DTOs/userSignupDTO";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
 import { login } from "./login";
+import axiosInstance from "./axiosInstance";
 
 export const signup = async (signupFormData: UserSignupDTO): Promise<ResponseObject<string>> => {
   if (!signupFormData.name || !signupFormData.lastname || !signupFormData.email || !signupFormData.password || !signupFormData.confirmPassword) {
     return { success: false, data: "Debe ingresar todos los datos para crear su cuenta" }
   }
   try {
-    const response: ResponseObject<string> = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/create`, signupFormData);
+    const response: ResponseObject<string> = await axiosInstance.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/create`, signupFormData);
 
     await login({ email: signupFormData.email, password: signupFormData.password });
 

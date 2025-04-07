@@ -1,11 +1,12 @@
 import { ResponseObject } from "@/src/DTOs/responseDTO";
 import { UserLoginDTO } from "@/src/DTOs/userLoginDTO";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
+import axiosInstance from "./axiosInstance";
 
 export const login = async (loginFormData: UserLoginDTO): Promise<ResponseObject<string>> => {
   if(!loginFormData.email || !loginFormData.password) return {success: false, data: "Debe ingresar email y contraseña"}
   try {
-    const response: ResponseObject<string> = await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, loginFormData);
+    const response: ResponseObject<string> = await axiosInstance.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/login`, loginFormData);
     
     return {
       success: true,

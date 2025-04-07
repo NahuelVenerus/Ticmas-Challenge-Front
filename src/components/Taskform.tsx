@@ -29,7 +29,7 @@ const TaskForm = ({ setUpdateSidebar }: TaskFormProps) => {
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
   const [isArchived, setIsArchived] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-
+  
   const clearFields = () => {
     title.setValue('');
     description.setValue('');

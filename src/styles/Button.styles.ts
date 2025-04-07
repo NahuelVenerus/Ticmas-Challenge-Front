@@ -30,8 +30,10 @@ export const ButtonContainerColumn = styled(ButtonContainer)`
   width: 100%;
 `;
 
-
-export const Button = styled.button<ButtonProps>`
+export const Button = styled.button.withConfig({
+  shouldForwardProp: (prop) =>
+    !['bgColor', 'hoverColor', 'activeColor', 'color'].includes(prop),
+})<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,8 +44,6 @@ export const Button = styled.button<ButtonProps>`
   font-weight: 600;
   border: none;
   border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   height: 6vh;
   width: 100%;
   flex-grow: 1;
@@ -55,7 +55,7 @@ export const Button = styled.button<ButtonProps>`
   }
 
   &:active {
-    background-color: ${({ activeColor, disabled }) => (disabled ? 'grey' : activeColor || '#e74c3c')};desactivado
+    background-color: ${({ activeColor, disabled }) => (disabled ? 'grey' : activeColor || '#e74c3c')};
   }
 `;
 
@@ -84,3 +84,5 @@ export const StyledToggleButton = styled.button<ToggleButtonProps & { isActive: 
     background-color: ${({ hoverColor }) => hoverColor || '#c0392b'};
   }
 `;
+
+StyledToggleButton.shouldForwardProp = (prop: string) => !['isActive', 'hoverColor'].includes(prop);

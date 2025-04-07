@@ -1,12 +1,13 @@
 import { ResponseObject } from "@/src/DTOs/responseDTO";
 import { FormTaskDTO, TaskDTO } from "@/src/DTOs/taskDTO";
-import axios, { AxiosError } from "axios";
+import { AxiosError } from "axios";
+import axiosInstance from "./axiosInstance";
 
 export const editTask = async (taskData: FormTaskDTO): Promise<ResponseObject<TaskDTO | string>> => {
     if (!taskData.title || !taskData.description) return { success: false, data: "Debe ingresar un título o una descripción" };
     if (!taskData.id) return { success: false, data: "No se encuentra la tarea que desea editar" };
     try {
-        const response: ResponseObject<TaskDTO> = await axios.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/edit/${taskData.id}`, {
+        const response: ResponseObject<TaskDTO> = await axiosInstance.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/tasks/edit/${taskData.id}`, {
             title: taskData.title,
             description: taskData.description,
         })
